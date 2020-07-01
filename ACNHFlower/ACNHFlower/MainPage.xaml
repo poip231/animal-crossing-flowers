@@ -1,0 +1,85 @@
+﻿<Page
+    x:Class="ACNHFlower.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ACNHFlower"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    
+    xmlns:muxc="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 7)"
+    >
+
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Rectangle x:Name="RectTitle"
+                   Fill="{ThemeResource CustomAcrylicBackgroundBrush}"
+                   Height="{Binding ElementName=MenuBarMain,Path=ActualHeight}"/>
+
+        <Image Source="/Assets/RosesGold.png"
+                   Height="40"
+                   Margin="10 0 0 0"
+               HorizontalAlignment="Left"
+                   x:Name="ImageTitle"/>
+
+        <ComboBox x:Name="ComboBoxChoose"
+                      Width="100"
+                      Margin="60 0 0 0"
+                      VerticalAlignment="Center"
+                  HorizontalAlignment="Left"/>
+
+        <StackPanel Orientation="Horizontal">
+            <muxc:MenuBar x:Name="MenuBarMain"
+                          Margin="170 0 0 0"
+                          Height="50">
+
+                <muxc:MenuBarItem Title="功能">
+                    <MenuFlyoutItem Text="退出"
+                                    x:Name="MenuExit"
+                                    Click="MenuFlyoutItem_Click"/>
+                </muxc:MenuBarItem>
+
+                <muxc:MenuBarItem Title="帮助">
+                    <MenuFlyoutItem Text="关于"
+                                    x:Name="MenuAbout"
+                                    Click="MenuFlyoutItem_Click"/>
+                </muxc:MenuBarItem>
+
+            </muxc:MenuBar>
+            <TextBlock x:Name="TextBlockTitle"
+                       Text=""
+                       FontSize="10"
+                       Foreground="#FF777777"
+                       VerticalAlignment="Center"
+                       Margin="20 0 0 0"/>
+        </StackPanel>
+        
+        <muxc:NavigationView x:Name="NaviViewMain"
+                             PaneDisplayMode="Top"
+                             Grid.Row="1"
+                             IsBackButtonVisible="Collapsed"
+                             IsSettingsVisible="False"
+                             SelectionChanged="NaviViewMain_SelectionChanged">
+            <muxc:NavigationView.MenuItems>
+                <muxc:NavigationViewItem x:Name="NaviViewItemZajiao" Icon="Sort" Content="杂交模拟"/>
+                <muxc:NavigationViewItem x:Name="NaviViewItemParent" Icon="Bookmarks" Content="推算父本"/>
+            </muxc:NavigationView.MenuItems>
+            <Frame x:Name="FrameMain"/>
+        </muxc:NavigationView>
+
+        <Button x:Name="ButtonSearch"
+                Content="查  询"
+                Margin="0 3 20 0"
+                Grid.Row="1"
+                Style="{StaticResource AccentButtonStyle}"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"/>
+
+    </Grid>
+</Page>

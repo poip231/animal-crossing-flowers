@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Source>C:\Users\ZKLH\source\repos\animal_crossing_flowers\ACNHFlower\ACNHFlower\Assets\RosesGold.png</Source>
+    <SmallTileSource>C:\Users\ZKLH\source\repos\animal_crossing_flowers\ACNHFlower\ACNHFlower\Assets\RosesGold.png</SmallTileSource>
+    <MediumTileSource>C:\Users\ZKLH\source\repos\animal_crossing_flowers\ACNHFlower\ACNHFlower\Assets\RosesGold.png</MediumTileSource>
+    <WideTileSource>C:\Users\ZKLH\source\repos\animal_crossing_flowers\ACNHFlower\ACNHFlower\Assets\RosesGold.png</WideTileSource>
+    <LargeTileSource>C:\Users\ZKLH\source\repos\animal_crossing_flowers\ACNHFlower\ACNHFlower\Assets\RosesGold.png</LargeTileSource>
+    <AppIconSource>C:\Users\ZKLH\source\repos\animal_crossing_flowers\ACNHFlower\ACNHFlower\Assets\RosesGold.png</AppIconSource>
+    <SplashScreenSource>C:\Users\ZKLH\source\repos\animal_crossing_flowers\ACNHFlower\ACNHFlower\Assets\RosesGold.png</SplashScreenSource>
+    <PackageLogoSource>C:\Users\ZKLH\source\repos\animal_crossing_flowers\ACNHFlower\ACNHFlower\Assets\RosesGold.png</PackageLogoSource>
+  </PropertyGroup>
+</Project>

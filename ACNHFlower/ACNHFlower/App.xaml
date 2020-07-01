@@ -1,0 +1,23 @@
+﻿<Application
+    x:Class="ACNHFlower.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ACNHFlower"
+    xmlns:muxc="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 7)">
+
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
+                <!-- Other merged dictionaries here -->
+            </ResourceDictionary.MergedDictionaries>
+            <!-- Other app resources here -->
+
+            <muxc:AcrylicBrush x:Key="CustomAcrylicBackgroundBrush"
+                               BackgroundSource="HostBackdrop"
+                               TintOpacity="0.2"
+                               TintColor="#FFFFFFFF"/>
+        </ResourceDictionary>
+    </Application.Resources>
+
+</Application>

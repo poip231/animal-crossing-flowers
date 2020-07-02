@@ -70,7 +70,8 @@
                 <muxc:NavigationViewItem x:Name="NaviViewItemZajiao" Icon="Sort" Content="杂交模拟"/>
                 <muxc:NavigationViewItem x:Name="NaviViewItemParent" Icon="Bookmarks" Content="推算父本"/>
             </muxc:NavigationView.MenuItems>
-            <Frame x:Name="FrameMain"/>
+            <Frame x:Name="FrameMain"
+                   Background="{ThemeResource CustomAcrylicBackgroundBrush}"/>
         </muxc:NavigationView>
 
         <Button x:Name="ButtonSearch"

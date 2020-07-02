@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ACNHFlower.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,6 +8,7 @@ using Windows.ApplicationModel;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Animation;
+using static ACNHFlower.Models.MyFlower;
 
 namespace ACNHFlower
 {
@@ -16,6 +18,22 @@ namespace ACNHFlower
         #region MainPage.xaml
 
         public static Frame FrameMain;
+        public static ComboBox ComboBoxChoose;
+        public static Button ButtonSearch;
+
+        public static List<MyFlower> FlowerAll;
+
+        /// <summary>
+        /// 设置了哪种花朵
+        /// </summary>
+        public static FlowerType SelectedFlower;
+        /// <summary>
+        /// 所设置花朵种类的所有花
+        /// </summary>
+        public static List<MyFlower> ListColorDic;
+
+        public static List<string> ListColor;
+        public static List<string> ListColorName;
 
         public static string AppVersion = string.Format("{0}.{1}.{2}.{3}",
                     Package.Current.Id.Version.Major,

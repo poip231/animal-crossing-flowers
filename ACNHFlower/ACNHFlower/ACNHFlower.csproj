@@ -120,9 +120,13 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="GlobalTool.cs" />
+    <Compile Include="Helpers\FlowerHelper.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\ChildCard.cs" />
+    <Compile Include="Models\MyFlower.cs" />
+    <Compile Include="Models\ParentCard.cs" />
     <Compile Include="Pages\PageParent.xaml.cs">
       <DependentUpon>PageParent.xaml</DependentUpon>
     </Compile>
@@ -270,10 +274,14 @@
     <PackageReference Include="Microsoft.UI.Xaml">
       <Version>2.4.2</Version>
     </PackageReference>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>12.0.3</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Helpers\" />
-    <Folder Include="Models\" />
+    <EmbeddedResource Include="Assets\flower_v02.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

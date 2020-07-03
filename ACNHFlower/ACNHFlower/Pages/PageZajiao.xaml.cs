@@ -55,8 +55,15 @@ namespace ACNHFlower.Pages
 
         private void BindFlower()
         {
+            int index = GlobalTool.ComboBoxChoose.SelectedIndex;
             GlobalTool.ComboBoxChoose.SelectionChanged -= GroupChanged;
-            GlobalTool.ComboBoxChoose.SelectionChanged -= GroupChanged;
+            GlobalTool.ComboBoxChoose.SelectedIndex = -1;
+            GlobalTool.ComboBoxChoose.SelectionChanged += GroupChanged;
+            GlobalTool.ComboBoxChoose.SelectedIndex = index;
+
+            GlobalTool.ButtonSearch.Click -= Button_Click;
+            GlobalTool.ButtonSearch.Click += Button_Click;
+
             CheckBoxColorL.IsChecked = true;
             CheckBoxColorR.IsChecked = true;
         }
@@ -119,6 +126,125 @@ namespace ACNHFlower.Pages
             ComboBoxA4R.SelectionChanged += GroupChanged;
         }
 
+        private async void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (GlobalTool.NaviViewMain.SelectedItem != GlobalTool.NaviItemZajiao) return;
+
+            List<MyFlower> ParentL = new List<MyFlower>();
+            List<MyFlower> ParentR = new List<MyFlower>();
+
+            if (GlobalTool.BoolColorL == true)
+            {//按颜色L
+                if (GlobalTool.IndexColorL == 0)
+                {
+                    await GlobalTool.ShowDialog("错误", "没有选择颜色");
+                    return;
+                }
+                foreach (var everyflower in SelectedColorDicL) ParentL.Add(everyflower);
+            }
+            if (GlobalTool.BoolColorR == true)
+            {//按颜色R
+                if (GlobalTool.IndexColorR == 0)
+                {
+                    await GlobalTool.ShowDialog("错误", "没有选择颜色");
+                    return;
+                }
+                foreach (var everyflower in SelectedColorDicR) ParentR.Add(everyflower);
+            }
+            if (GlobalTool.BoolGeneL == true)
+            {//按基因型L
+                Gene a1 = (Gene)Enum.Parse(typeof(Gene), GlobalTool.ItemA1L);
+                Gene a2 = (Gene)Enum.Parse(typeof(Gene), GlobalTool.ItemA2L);
+                Gene a3 = (Gene)Enum.Parse(typeof(Gene), GlobalTool.ItemA3L);
+                Gene a4 = (Gene)Enum.Parse(typeof(Gene), GlobalTool.ItemA4L);
+                MyFlower f = new MyFlower(GlobalTool.SelectedFlower, a1, a2, a3, a4);
+                foreach (var i in f.GetIntArray())
+                {
+                    if (i == 0)
+                    {
+                        await GlobalTool.ShowDialog("错误", "没有选择基因型");
+                        return;
+                    }
+                }
+                foreach (var a in GlobalTool.ListColorDic)
+                {
+                    if (f.GetGeneName() == a.GetGeneName()) ParentL.Add(a);
+                }
+            }
+            if (GlobalTool.BoolGeneR == true)
+            {//按基因型R
+                Gene a1 = (Gene)Enum.Parse(typeof(Gene), GlobalTool.ItemA1R);
+                Gene a2 = (Gene)Enum.Parse(typeof(Gene), GlobalTool.ItemA2R);
+                Gene a3 = (Gene)Enum.Parse(typeof(Gene), GlobalTool.ItemA3R);
+                Gene a4 = (Gene)Enum.Parse(typeof(Gene), GlobalTool.ItemA4R);
+                MyFlower f = new MyFlower(GlobalTool.SelectedFlower, a1, a2, a3, a4);
+                foreach (var i in f.GetIntArray())
+                {
+                    if (i == 0)
+                    {
+                        await GlobalTool.ShowDialog("错误", "没有选择基因型");
+                        return;
+                    }
+                }
+                foreach (var a in GlobalTool.ListColorDic)
+                {
+                    if (f.GetGeneName() == a.GetGeneName()) ParentR.Add(a);
+                }
+            }
+            if (GlobalTool.BoolSeedL == true)
+            {//按种子L
+                int index = GlobalTool.IndexSeedL;
+                if (index == 0)
+                {
+                    await GlobalTool.ShowDialog("错误", "没有选择种子");
+                    return;
+                }
+                ParentL.Add(ListSeed[index - 1]);
+            }
+            if (GlobalTool.BoolSeedR == true)
+            {//按种子L
+                int index = GlobalTool.IndexSeedR;
+                if (index == 0)
+                {
+                    await GlobalTool.ShowDialog("错误", "没有选择种子");
+                    return;
+                }
+                ParentR.Add(ListSeed[index - 1]);
+            }
+
+            ObservableCollection<ChildCard> result = new ObservableCollection<ChildCard>();
+            foreach (var L in ParentL)
+            {
+                foreach (var R in ParentR)
+                {
+                    var children = FlowerHelper.GetOurChildren(L, R);
+                    foreach (var child in children)
+                    {
+                        var childcard = new ChildCard(L, R, child, FlowerHelper.GetProbability(L, R, child));
+                        bool isinList = false;
+                        foreach (var a in result)
+                        {
+                            if (
+                                (
+                                childcard.Gene == a.Gene &&
+                                childcard.GeneP1 == a.GeneP1 &&
+                                childcard.GeneP2 == a.GeneP2
+                                )
+                                ||
+                                (
+                                childcard.Gene == a.Gene &&
+                                childcard.GeneP2 == a.GeneP1 &&
+                                childcard.GeneP1 == a.GeneP2
+                                )
+                                ) isinList = true;
+                        }
+                        if (!isinList) result.Add(childcard);
+                    }
+                }
+            }
+            ListViewChildren.ItemsSource = result;
+        }
+
         private void GroupChanged(object sender, SelectionChangedEventArgs e)
         {
             GlobalTool.ChangeZajiaoComboBox(sender);
@@ -130,6 +256,7 @@ namespace ACNHFlower.Pages
             {
                 case "ComboBoxChoose":
                     {
+                        if (cb.SelectedIndex < 0) return;
                         TextBlockTypeL.Text = FlowerHelper.FlowerNameShow[GlobalTool.SelectedFlower];
                         TextBlockTypeR.Text = TextBlockTypeL.Text;
 

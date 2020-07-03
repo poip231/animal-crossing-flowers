@@ -16,30 +16,7 @@ namespace ACNHFlower.Helpers
     class FlowerHelper
     {
 
-        public const string FlowerJsonName = "flower_v02.json";
-
-        /// <summary>
-        /// 检查本地文件夹有没有flower_v2.json这个文件，没有就创建
-        /// </summary>
-        /// <param name="reset">是否重置本地词库，默认为非重置</param>
-        public static async Task CheckLocalJson(bool reset = false)
-        {
-            StorageFolder folder = ApplicationData.Current.LocalFolder;
-
-            //StorageFile file = await folder.GetFileAsync(EmojiFileName);
-            StorageFile file = (StorageFile) await folder.TryGetItemAsync(FlowerJsonName);
-
-            //await file.DeleteAsync(); //调试删除文件用
-
-            if (file != null && !reset) return;
-
-            file = await folder.CreateFileAsync(FlowerJsonName, CreationCollisionOption.ReplaceExisting);
-            Uri uri = new Uri("ms-appx:///Assets/" + FlowerJsonName);
-            StorageFile jsonFile = await StorageFile.GetFileFromApplicationUriAsync(uri);
-            string txt = await FileIO.ReadTextAsync(jsonFile);
-
-            await FileIO.WriteTextAsync(file, txt);
-        }
+        public const string FlowerJsonName = @"ms-appx:///Assets/flower_v02.json";
 
         /// <summary>
         /// 读取本地Emoji词库
@@ -51,7 +28,8 @@ namespace ACNHFlower.Helpers
             try
             {
                 StorageFolder folder = ApplicationData.Current.LocalFolder;
-                StorageFile file = await folder.GetFileAsync(FlowerJsonName);
+                Uri uri = new Uri(FlowerJsonName);
+                StorageFile file = await StorageFile.GetFileFromApplicationUriAsync(uri);
                 return await FileIO.ReadTextAsync(file);
             }
             catch (Exception e)

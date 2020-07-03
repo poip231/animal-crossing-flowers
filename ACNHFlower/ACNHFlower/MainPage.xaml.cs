@@ -40,6 +40,8 @@ namespace ACNHFlower
 
             BindData();
             BindFlower();
+
+            FrameMain.Navigate(typeof(PageStartup));
         }
 
         /// <summary>
@@ -71,12 +73,15 @@ namespace ACNHFlower
             GlobalTool.FrameMain = FrameMain;
             GlobalTool.ComboBoxChoose = ComboBoxChoose;
             GlobalTool.ButtonSearch = ButtonSearch;
+
+            GlobalTool.NaviViewMain = NaviViewMain;
+            GlobalTool.NaviItemZajiao = NaviViewItemZajiao;
+            GlobalTool.NaviItemParent = NaviViewItemParent;
         }
 
-        private void BindData()
+        private async void BindData()
         {
-            FlowerHelper.CheckLocalJson().Wait();
-            string json = FlowerHelper.GetFlowerAll().GetAwaiter().GetResult();
+            string json = await FlowerHelper.GetFlowerAll();
             List<MyFlower> list = JsonConvert.DeserializeObject<List<MyFlower>>(json);
             GlobalTool.FlowerAll = list; 
         }
@@ -94,7 +99,7 @@ namespace ACNHFlower
             GlobalTool.ComboBoxChoose.SelectedIndex = 0;
         }
 
-        private void MenuFlyoutItem_Click(object sender, RoutedEventArgs e)
+        private async void MenuFlyoutItem_Click(object sender, RoutedEventArgs e)
         {
             string senderName = (sender as MenuFlyoutItem).Name;
             switch (senderName)
@@ -103,7 +108,7 @@ namespace ACNHFlower
                     GlobalTool.CloseApp();
                     break;
                 case "MenuAbout":
-                    GlobalTool.ShowDialog("关于",
+                    await GlobalTool.ShowDialog("关于",
                         "动物森友会花卉杂交 v"
                         + GlobalTool.AppVersion
                         + "\n\n作者：FunJoo\n联系方式：huanzhuzai@outlook.com");

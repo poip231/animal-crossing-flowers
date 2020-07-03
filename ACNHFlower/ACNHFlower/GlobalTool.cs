@@ -1,4 +1,5 @@
-﻿using ACNHFlower.Models;
+﻿using ACNHFlower.Helpers;
+using ACNHFlower.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,10 @@ namespace ACNHFlower
         public static Frame FrameMain;
         public static ComboBox ComboBoxChoose;
         public static Button ButtonSearch;
+
+        public static NavigationView NaviViewMain;
+        public static NavigationViewItem NaviItemZajiao;
+        public static NavigationViewItem NaviItemParent;
 
         public static List<MyFlower> FlowerAll;
 
@@ -85,14 +90,19 @@ namespace ACNHFlower
 
         #endregion
 
+        #region ContentDialog
+
+        private static ContentDialog noResultDialog;
+
+        /*
         /// <summary>
         /// 显示警告框
         /// </summary>
         /// <param name="title">标题</param>
         /// <param name="msg">内容</param>
-        public static async void ShowDialog(string title, string msg)
+        public static async Task ShowDialog(string title, string msg)
         {
-            ContentDialog noResultDialog = new ContentDialog
+            noResultDialog = new ContentDialog
             {
                 Title = title,
                 Content = msg,
@@ -100,6 +110,21 @@ namespace ACNHFlower
             };
             await noResultDialog.ShowAsync();
         }
+        */
+
+        public static async Task ShowDialog(string title, string msg)
+        {
+            await DialogHelper.CreateContentDialogAsync(
+                new ContentDialog 
+                { 
+                    Title = title,
+                    Content = msg,
+                    PrimaryButtonText = "确定"
+                },
+                awaitPreviousDialog: true);
+        }
+
+        #endregion
 
         #region PageZajiao.xaml
 

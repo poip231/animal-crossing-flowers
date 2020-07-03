@@ -1,0 +1,34 @@
+﻿<Page
+    x:Class="ACNHFlower.Pages.PageStartup"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ACNHFlower.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource CustomAcrylicBackgroundBrush}">
+
+    <GridView HorizontalAlignment="Center"
+              VerticalAlignment="Center"
+              IsEnabled="False">
+        <Image Source="/Assets/RosesYellow.png"
+               Height="80"/>
+        <Image Source="/Assets/RosesRed.png"
+               Height="80"/>
+        <Image Source="/Assets/RosesWhite.png"
+               Height="80"/>
+        <Image Source="/Assets/RosesOrange.png"
+               Height="80"/>
+        <Image Source="/Assets/RosesGold.png"
+               Height="80"/>
+        <Image Source="/Assets/RosesDark.png"
+               Height="80"/>
+        <Image Source="/Assets/RosesPurple.png"
+               Height="80"/>
+        <Image Source="/Assets/RosesBlue.png"
+               Height="80"/>
+        <Image Source="/Assets/RosesPink.png"
+               Height="80"/>
+
+    </GridView>
+</Page>

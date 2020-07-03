@@ -120,6 +120,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="GlobalTool.cs" />
+    <Compile Include="Helpers\DialogHelper.cs" />
     <Compile Include="Helpers\FlowerHelper.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -129,6 +130,9 @@
     <Compile Include="Models\ParentCard.cs" />
     <Compile Include="Pages\PageParent.xaml.cs">
       <DependentUpon>PageParent.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\PageStartup.xaml.cs">
+      <DependentUpon>PageStartup.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\PageZajiao.xaml.cs">
       <DependentUpon>PageZajiao.xaml</DependentUpon>
@@ -259,6 +263,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\PageParent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\PageStartup.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

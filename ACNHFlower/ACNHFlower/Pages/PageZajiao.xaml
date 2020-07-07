@@ -9,6 +9,7 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     
     xmlns:muxc="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 7)"
+    xmlns:controls="using:Microsoft.UI.Xaml.Controls"
     >
 
     <Grid x:Name="GridPageParent">
@@ -219,9 +220,9 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid x:Name="GridChildrenCard"
-                                        Margin="0 5"
-                              Width="150"
-                              Padding="15 0 15 5"
+                              Margin="0 5"
+                              Padding="0 0 0 5"
+                              Width="130"
                               Background="White">
                             <StackPanel Orientation="Vertical">
                                 <Image Source="{Binding ImagePath}"

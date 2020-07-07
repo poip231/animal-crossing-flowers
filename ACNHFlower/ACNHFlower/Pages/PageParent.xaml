@@ -6,9 +6,270 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    xmlns:muxc="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 7)"
+    xmlns:controls="using:Microsoft.UI.Xaml.Controls"
+    >
 
-    <Grid>
+    <Grid x:Name="GridPageParent">
+
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="VisualStateGroup">
+                <VisualState x:Name="Phone">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="GridLeft.Width" Value="220"/>
+                        <Setter Target="ComboBoxColor.Width" Value="200"/>
+                        <Setter Target="ComboBoxA1.Width" Value="100"/>
+                        <Setter Target="ComboBoxA2.Width" Value="100"/>
+                        <Setter Target="ComboBoxA3.Width" Value="100"/>
+                        <Setter Target="ComboBoxA4.Width" Value="100"/>
+                        <Setter Target="ComboBoxA1.(Grid.Column)" Value="0"/>
+                        <Setter Target="ComboBoxA2.(Grid.Column)" Value="2"/>
+                        <Setter Target="ComboBoxA3.(Grid.Column)" Value="0"/>
+                        <Setter Target="ComboBoxA4.(Grid.Column)" Value="2"/>
+                        <Setter Target="ComboBoxA1.(Grid.Row)" Value="0"/>
+                        <Setter Target="ComboBoxA2.(Grid.Row)" Value="0"/>
+                        <Setter Target="ComboBoxA3.(Grid.Row)" Value="1"/>
+                        <Setter Target="ComboBoxA4.(Grid.Row)" Value="1"/>
+                        <Setter Target="ComboBoxA1.(Grid.ColumnSpan)" Value="2"/>
+                        <Setter Target="ComboBoxA2.(Grid.ColumnSpan)" Value="2"/>
+                        <Setter Target="ComboBoxA3.(Grid.ColumnSpan)" Value="2"/>
+                        <Setter Target="ComboBoxA4.(Grid.ColumnSpan)" Value="2"/>
+                        <Setter Target="ComboBoxA1.(Grid.RowSpan)" Value="1"/>
+                        <Setter Target="ComboBoxA2.(Grid.RowSpan)" Value="1"/>
+                        <Setter Target="ComboBoxA3.(Grid.RowSpan)" Value="1"/>
+                        <Setter Target="ComboBoxA4.(Grid.RowSpan)" Value="1"/>
+                    </VisualState.Setters>
+                </VisualState>
+
+                <VisualState x:Name="Tablet">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="800" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="GridLeft.Width" Value="300"/>
+                        <Setter Target="ComboBoxColor.Width" Value="270"/>
+                        <Setter Target="ComboBoxA1.Width" Value="120"/>
+                        <Setter Target="ComboBoxA2.Width" Value="120"/>
+                        <Setter Target="ComboBoxA3.Width" Value="120"/>
+                        <Setter Target="ComboBoxA4.Width" Value="120"/>
+                        <Setter Target="ComboBoxA1.(Grid.Column)" Value="0"/>
+                        <Setter Target="ComboBoxA2.(Grid.Column)" Value="2"/>
+                        <Setter Target="ComboBoxA3.(Grid.Column)" Value="0"/>
+                        <Setter Target="ComboBoxA4.(Grid.Column)" Value="2"/>
+                        <Setter Target="ComboBoxA1.(Grid.Row)" Value="0"/>
+                        <Setter Target="ComboBoxA2.(Grid.Row)" Value="0"/>
+                        <Setter Target="ComboBoxA3.(Grid.Row)" Value="1"/>
+                        <Setter Target="ComboBoxA4.(Grid.Row)" Value="1"/>
+                        <Setter Target="ComboBoxA1.(Grid.ColumnSpan)" Value="2"/>
+                        <Setter Target="ComboBoxA2.(Grid.ColumnSpan)" Value="2"/>
+                        <Setter Target="ComboBoxA3.(Grid.ColumnSpan)" Value="2"/>
+                        <Setter Target="ComboBoxA4.(Grid.ColumnSpan)" Value="2"/>
+                        <Setter Target="ComboBoxA1.(Grid.RowSpan)" Value="1"/>
+                        <Setter Target="ComboBoxA2.(Grid.RowSpan)" Value="1"/>
+                        <Setter Target="ComboBoxA3.(Grid.RowSpan)" Value="1"/>
+                        <Setter Target="ComboBoxA4.(Grid.RowSpan)" Value="1"/>
+                    </VisualState.Setters>
+                </VisualState>
+
+                <VisualState x:Name="Desktop">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="1200" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="GridLeft.Width" Value="400"/>
+                        <Setter Target="ComboBoxColor.Width" Value="380"/>
+                        <Setter Target="ComboBoxA1.Width" Value="90"/>
+                        <Setter Target="ComboBoxA2.Width" Value="90"/>
+                        <Setter Target="ComboBoxA3.Width" Value="90"/>
+                        <Setter Target="ComboBoxA4.Width" Value="90"/>
+                        <Setter Target="ComboBoxA1.(Grid.Column)" Value="0"/>
+                        <Setter Target="ComboBoxA2.(Grid.Column)" Value="1"/>
+                        <Setter Target="ComboBoxA3.(Grid.Column)" Value="2"/>
+                        <Setter Target="ComboBoxA4.(Grid.Column)" Value="3"/>
+                        <Setter Target="ComboBoxA1.(Grid.Row)" Value="0"/>
+                        <Setter Target="ComboBoxA2.(Grid.Row)" Value="0"/>
+                        <Setter Target="ComboBoxA3.(Grid.Row)" Value="0"/>
+                        <Setter Target="ComboBoxA4.(Grid.Row)" Value="0"/>
+                        <Setter Target="ComboBoxA1.(Grid.ColumnSpan)" Value="1"/>
+                        <Setter Target="ComboBoxA2.(Grid.ColumnSpan)" Value="1"/>
+                        <Setter Target="ComboBoxA3.(Grid.ColumnSpan)" Value="1"/>
+                        <Setter Target="ComboBoxA4.(Grid.ColumnSpan)" Value="1"/>
+                        <Setter Target="ComboBoxA1.(Grid.RowSpan)" Value="2"/>
+                        <Setter Target="ComboBoxA2.(Grid.RowSpan)" Value="2"/>
+                        <Setter Target="ComboBoxA3.(Grid.RowSpan)" Value="2"/>
+                        <Setter Target="ComboBoxA4.(Grid.RowSpan)" Value="2"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="2"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Rectangle Fill="LightGray"
+                   Grid.Column="1"/>
+
+        <Grid x:Name="GridRight"
+              Grid.Column="2"
+              Background="{ThemeResource CustomAcrylicBackgroundBrush}">
+            <ListView x:Name="ListViewParent"
+                  Width="Auto"
+                  Height="Auto"
+                  Margin="5"
+                  ScrollViewer.VerticalScrollBarVisibility="Visible"
+                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                  Grid.Row="1"
+                  Grid.Column="1">
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <ItemsWrapGrid Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid x:Name="GridParentCard"
+                              HorizontalAlignment="Center"
+                              VerticalAlignment="Center"
+                              Background="White"
+                              Width="200"
+                              Margin="0 5"
+                              Padding="0 0 0 5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="100"/>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+
+                            <StackPanel x:Name="StackPanelCardLeft"
+                            HorizontalAlignment="Center"
+                            Margin="2,5,0,0">
+                                <Image Source="{Binding ImagePathLeft}"
+                           Height="60"
+                           HorizontalAlignment="Center"/>
+                                <TextBlock x:Name="TextBlockNameLeft"
+                               Text="{Binding TextNameLeft}"
+                               FontSize="12"
+                               HorizontalAlignment="Center"/>
+                                <TextBlock x:Name="TextBlockGeneLeft"
+                               Text="{Binding TextGeneLeft}"
+                               FontSize="12"
+                               HorizontalAlignment="Center"/>
+                            </StackPanel>
+
+                            <StackPanel x:Name="StackPanelCardRight"
+                            HorizontalAlignment="Center"
+                            Margin="0,5,2,0"
+                            Grid.Column="1">
+                                <Image Source="{Binding ImagePathRight}"
+                           Height="60"
+                           HorizontalAlignment="Center"/>
+                                <TextBlock x:Name="TextBlockNameRight"
+                               Text="{Binding TextNameRight}"
+                               FontSize="12"
+                               HorizontalAlignment="Center"/>
+                                <TextBlock x:Name="TextBlockGeneRight"
+                               Text="{Binding TextGeneRight}"
+                               FontSize="12"
+                               HorizontalAlignment="Center"/>
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+
+        <ScrollViewer VerticalScrollMode="Enabled"
+                      Padding="10 0 15 0">
+            <Grid x:Name="GridLeft" Width="300">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="120" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <StackPanel Orientation="Vertical"
+                                HorizontalAlignment="Center"
+                                Margin="5,0">
+                    <TextBlock x:Name="TextBlockType"
+                                   Text="波斯菊"
+                                   FontSize="20"
+                                   Margin="0,20,0,10"
+                                   HorizontalAlignment="Center"/>
+                    <TextBlock x:Name="TextBlockColor"
+                                   Text="红色"
+                                   Foreground="Red"
+                                   FontSize="15"
+                                   FontWeight="Bold"
+                                   HorizontalAlignment="Center"/>
+                    <TextBlock x:Name="TextBlockGene"
+                                   FontSize="15"
+                                   Text=" "
+                                   TextWrapping="Wrap"
+                                   HorizontalAlignment="Center"/>
+                </StackPanel>
+
+                <Image x:Name="ImageFlower"
+                           Source="/Assets/CosmosRed.png"
+                           Grid.Row="1"
+                           Margin="20"/>
+
+                <StackPanel x:Name="StackPanelContent"
+                                Grid.Row="2"
+                                Margin="5">
+                    <CheckBox x:Name="CheckBoxColor"
+                                  Foreground="Gray"
+                                  Margin="0,5,0,0"
+                                  Content="按颜色查父本"
+                                  Checked="CheckBox_Checked"
+                                  Unchecked="CheckBox_Checked"/>
+                    <ComboBox x:Name="ComboBoxColor"
+                                  IsEnabled="{Binding Path=IsChecked, ElementName=CheckBoxColor}"/>
+                    <CheckBox x:Name="CheckBoxGene"
+                                  Foreground="Gray"
+                                  Margin="0,5,0,0"
+                                  Content="按基因型查父本"
+                                  Checked="CheckBox_Checked"
+                                  Unchecked="CheckBox_Checked"/>
+                    <TextBlock Text="可部分留空"
+                                   FontSize="10"
+                                   Foreground="Gray"/>
+                    <Grid x:Name="GridGene">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <ComboBox x:Name="ComboBoxA1"
+                                  Margin="2"
+                                      IsEnabled="{Binding Path=IsChecked, ElementName=CheckBoxGene}"/>
+                        <ComboBox x:Name="ComboBoxA2"
+                                  Margin="2"
+                                      IsEnabled="{Binding Path=IsChecked, ElementName=CheckBoxGene}"/>
+                        <ComboBox x:Name="ComboBoxA3"
+                                  Margin="2"
+                                      IsEnabled="{Binding Path=IsChecked, ElementName=CheckBoxGene}"/>
+                        <ComboBox x:Name="ComboBoxA4"
+                                  Margin="2"
+                                      IsEnabled="{Binding Path=IsChecked, ElementName=CheckBoxGene}"/>
+                    </Grid>
+                </StackPanel>
+            </Grid>
+        </ScrollViewer>
 
     </Grid>
 </Page>

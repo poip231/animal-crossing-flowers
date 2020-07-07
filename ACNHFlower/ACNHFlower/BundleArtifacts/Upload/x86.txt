@@ -1,0 +1,2 @@
+MainPackage=C:\Users\ZKLH\source\repos\animal_crossing_flowers\ACNHFlower\ACNHFlower\bin\x86\Release\Upload\ACNHFlower_1.0.0.0_x86.msix
+SymbolPackage=C:\Users\ZKLH\source\repos\animal_crossing_flowers\ACNHFlower\ACNHFlower\bin\x86\Release\Upload\ACNHFlower_1.0.0.0\ACNHFlower_1.0.0.0_x86.appxsym

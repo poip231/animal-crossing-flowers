@@ -1,9 +1,12 @@
-﻿using ACNHFlower.Helpers;
+﻿using ACNHFlower.Dialogs;
+using ACNHFlower.Helpers;
 using ACNHFlower.Models;
+using Microsoft.UI.Xaml.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.UI.ViewManagement;
@@ -21,10 +24,13 @@ namespace ACNHFlower
         public static Frame FrameMain;
         public static ComboBox ComboBoxChoose;
         public static Button ButtonSearch;
+        public static TeachingTip TipSearch;
 
-        public static NavigationView NaviViewMain;
-        public static NavigationViewItem NaviItemZajiao;
-        public static NavigationViewItem NaviItemParent;
+        public static DialogHelper ProDialog = new DialogHelper();
+
+        public static Windows.UI.Xaml.Controls.NavigationView NaviViewMain;
+        public static Windows.UI.Xaml.Controls.NavigationViewItem NaviItemZajiao;
+        public static Windows.UI.Xaml.Controls.NavigationViewItem NaviItemParent;
 
         public static List<MyFlower> FlowerAll;
 
@@ -57,6 +63,7 @@ namespace ACNHFlower
         {
             try
             {
+                FMGoBack();
                 FrameMain.Navigate(page, null, new DrillInNavigationTransitionInfo());
                 return true;
             }
@@ -88,13 +95,26 @@ namespace ACNHFlower
             Windows.UI.Xaml.Application.Current.Exit();
         }
 
+        /// <summary>
+        /// 显示进度条
+        /// </summary>
+        public static void ShowProgress()
+        {
+            DialogHelper.CreateContentDialog(new ProgressDialog(), true);
+        }
+
+        /// <summary>
+        /// 取消进度条
+        /// </summary>
+        public static void CloseProgress()
+        {
+            DialogHelper.ActiveDialog?.Hide();
+        }
+
         #endregion
 
         #region ContentDialog
 
-        private static ContentDialog noResultDialog;
-
-        /*
         /// <summary>
         /// 显示警告框
         /// </summary>
@@ -102,26 +122,13 @@ namespace ACNHFlower
         /// <param name="msg">内容</param>
         public static async Task ShowDialog(string title, string msg)
         {
-            noResultDialog = new ContentDialog
+            ContentDialog noResultDialog = new ContentDialog
             {
                 Title = title,
                 Content = msg,
                 CloseButtonText = "确定"
             };
             await noResultDialog.ShowAsync();
-        }
-        */
-
-        public static async Task ShowDialog(string title, string msg)
-        {
-            await DialogHelper.CreateContentDialogAsync(
-                new ContentDialog 
-                { 
-                    Title = title,
-                    Content = msg,
-                    PrimaryButtonText = "确定"
-                },
-                awaitPreviousDialog: true);
         }
 
         #endregion
@@ -150,8 +157,6 @@ namespace ACNHFlower
         public static string ItemA2R = "Unknown";
         public static string ItemA3R = "Unknown";
         public static string ItemA4R = "Unknown";
-
-        public static string ButtonNameZajiao;
 
         public static void ChangeZajiaoComboBox(object sender)
         {
@@ -219,6 +224,57 @@ namespace ACNHFlower
                     break;
                 case "CheckBoxSeedR":
                     BoolSeedR = s.IsChecked.Value;
+                    break;
+            }
+        }
+
+        #endregion
+
+        #region PageParent.xaml
+
+        public static bool BoolColor;
+        public static bool BoolGene;
+
+        public static int IndexColor;
+
+        public static string ItemA1 = "Unknown";
+        public static string ItemA2 = "Unknown";
+        public static string ItemA3 = "Unknown";
+        public static string ItemA4 = "Unknown";
+
+        public static void ChangeParentComboBox(object sender)
+        {
+            var s = sender as ComboBox;
+            switch (s.Name)
+            {
+                case "ComboBoxColor":
+                    IndexColor = s.SelectedIndex;
+                    break;
+                case "ComboBoxA1":
+                    ItemA1 = s.SelectedItem.ToString();
+                    break;
+                case "ComboBoxA2":
+                    ItemA2 = s.SelectedItem.ToString();
+                    break;
+                case "ComboBoxA3":
+                    ItemA3 = s.SelectedItem.ToString();
+                    break;
+                case "ComboBoxA4":
+                    ItemA4 = s.SelectedItem.ToString();
+                    break;
+            }
+        }
+
+        public static void ChangeParentCheckBox(object sender)
+        {
+            var s = sender as CheckBox;
+            switch (s.Name)
+            {
+                case "CheckBoxColor":
+                    BoolColor = s.IsChecked.Value;
+                    break;
+                case "CheckBoxGene":
+                    BoolGene = s.IsChecked.Value;
                     break;
             }
         }

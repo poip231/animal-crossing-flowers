@@ -7,15 +7,15 @@
   IgnorableNamespaces="uap mp">
 
   <Identity
-    Name="852ef090-ef63-4e12-b331-b427e579d1ef"
-    Publisher="CN=ZKLH"
+    Name="54589FunJoo.245715FA1B75F"
+    Publisher="CN=BC1FCB2C-0ACC-4D97-806E-7096F6E7F298"
     Version="1.0.0.0" />
 
-  <mp:PhoneIdentity PhoneProductId="852ef090-ef63-4e12-b331-b427e579d1ef" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="dc769482-2f1e-48bd-bae4-0840ddb1b8b4" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
-    <DisplayName>ACNHFlower</DisplayName>
-    <PublisherDisplayName>ZKLH</PublisherDisplayName>
+    <DisplayName>动物森友会花卉杂交</DisplayName>
+    <PublisherDisplayName>FunJoo</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
 

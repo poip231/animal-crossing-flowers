@@ -1,4 +1,5 @@
-﻿using ACNHFlower.Helpers;
+﻿using ACNHFlower.Dialogs;
+using ACNHFlower.Helpers;
 using ACNHFlower.Models;
 using ACNHFlower.Pages;
 using Newtonsoft.Json;
@@ -73,6 +74,7 @@ namespace ACNHFlower
             GlobalTool.FrameMain = FrameMain;
             GlobalTool.ComboBoxChoose = ComboBoxChoose;
             GlobalTool.ButtonSearch = ButtonSearch;
+            GlobalTool.TipSearch = TeachingTipSearch;
 
             GlobalTool.NaviViewMain = NaviViewMain;
             GlobalTool.NaviItemZajiao = NaviViewItemZajiao;
@@ -111,23 +113,29 @@ namespace ACNHFlower
                     await GlobalTool.ShowDialog("关于",
                         "动物森友会花卉杂交 v"
                         + GlobalTool.AppVersion
-                        + "\n\n作者：FunJoo\n联系方式：huanzhuzai@outlook.com");
+                        + "\n\n作者：FunJoo\n联系方式：huanzhuzai@outlook.com\n数据来源：Fandom");
                     break;
             }
         }
 
+        private bool FirstClick = true;
+        private NavigationViewItem CurrentItem;
         private void NaviViewMain_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
         {
-            if (NaviViewItemZajiao == sender.SelectedItem)
+            if (FirstClick)
             {
+                FirstClick = false;
                 FrameMain.Navigate(typeof(PageZajiao));
-                return;
-            }
-            if (NaviViewItemParent == sender.SelectedItem)
-            {
                 FrameMain.Navigate(typeof(PageParent));
-                return;
+                if (NaviViewItemZajiao == sender.SelectedItem) FrameMain.GoBack();
             }
+            else
+            {
+                if (sender.SelectedItem == CurrentItem) return;
+                if (NaviViewItemZajiao == sender.SelectedItem) FrameMain.GoBack();
+                if (NaviViewItemParent == sender.SelectedItem) FrameMain.GoForward();
+            }
+            CurrentItem = (NavigationViewItem)sender.SelectedItem;
         }
 
         private void ComboBoxChoose_SelectionChanged(object sender, SelectionChangedEventArgs e)

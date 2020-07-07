@@ -6,6 +6,8 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -34,6 +36,8 @@ namespace ACNHFlower.Pages
             BindFlower();
             BindGene();
         }
+
+        SynchronizationContext Sync = SynchronizationContext.Current;
 
         /// <summary>
         /// 设置了哪种花色左
@@ -137,7 +141,7 @@ namespace ACNHFlower.Pages
             {//按颜色L
                 if (GlobalTool.IndexColorL == 0)
                 {
-                    await GlobalTool.ShowDialog("错误", "没有选择颜色");
+                    GlobalTool.TipSearch.IsOpen = true;
                     return;
                 }
                 foreach (var everyflower in SelectedColorDicL) ParentL.Add(everyflower);
@@ -146,7 +150,7 @@ namespace ACNHFlower.Pages
             {//按颜色R
                 if (GlobalTool.IndexColorR == 0)
                 {
-                    await GlobalTool.ShowDialog("错误", "没有选择颜色");
+                    GlobalTool.TipSearch.IsOpen = true;
                     return;
                 }
                 foreach (var everyflower in SelectedColorDicR) ParentR.Add(everyflower);
@@ -162,7 +166,7 @@ namespace ACNHFlower.Pages
                 {
                     if (i == 0)
                     {
-                        await GlobalTool.ShowDialog("错误", "没有选择基因型");
+                        GlobalTool.TipSearch.IsOpen = true;
                         return;
                     }
                 }
@@ -182,7 +186,7 @@ namespace ACNHFlower.Pages
                 {
                     if (i == 0)
                     {
-                        await GlobalTool.ShowDialog("错误", "没有选择基因型");
+                        GlobalTool.TipSearch.IsOpen = true;
                         return;
                     }
                 }
@@ -196,53 +200,62 @@ namespace ACNHFlower.Pages
                 int index = GlobalTool.IndexSeedL;
                 if (index == 0)
                 {
-                    await GlobalTool.ShowDialog("错误", "没有选择种子");
+                    GlobalTool.TipSearch.IsOpen = true;
                     return;
                 }
                 ParentL.Add(ListSeed[index - 1]);
             }
             if (GlobalTool.BoolSeedR == true)
-            {//按种子L
+            {//按种子R
                 int index = GlobalTool.IndexSeedR;
                 if (index == 0)
                 {
-                    await GlobalTool.ShowDialog("错误", "没有选择种子");
+                    GlobalTool.TipSearch.IsOpen = true;
                     return;
                 }
                 ParentR.Add(ListSeed[index - 1]);
             }
 
-            ObservableCollection<ChildCard> result = new ObservableCollection<ChildCard>();
-            foreach (var L in ParentL)
+            GlobalTool.ShowProgress();
+            await Task.Factory.StartNew(() =>
             {
-                foreach (var R in ParentR)
+                ObservableCollection<ChildCard> result = new ObservableCollection<ChildCard>();
+                foreach (var L in ParentL)
                 {
-                    var children = FlowerHelper.GetOurChildren(L, R);
-                    foreach (var child in children)
+                    foreach (var R in ParentR)
                     {
-                        var childcard = new ChildCard(L, R, child, FlowerHelper.GetProbability(L, R, child));
-                        bool isinList = false;
-                        foreach (var a in result)
+                        var children = FlowerHelper.GetOurChildren(L, R);
+                        foreach (var child in children)
                         {
-                            if (
-                                (
-                                childcard.Gene == a.Gene &&
-                                childcard.GeneP1 == a.GeneP1 &&
-                                childcard.GeneP2 == a.GeneP2
-                                )
-                                ||
-                                (
-                                childcard.Gene == a.Gene &&
-                                childcard.GeneP2 == a.GeneP1 &&
-                                childcard.GeneP1 == a.GeneP2
-                                )
-                                ) isinList = true;
+                            var childcard = new ChildCard(L, R, child, FlowerHelper.GetProbability(L, R, child));
+                            bool isinList = false;
+                            foreach (var a in result)
+                            {
+                                if (
+                                    (
+                                    childcard.Gene == a.Gene &&
+                                    childcard.GeneP1 == a.GeneP1 &&
+                                    childcard.GeneP2 == a.GeneP2
+                                    )
+                                    ||
+                                    (
+                                    childcard.Gene == a.Gene &&
+                                    childcard.GeneP2 == a.GeneP1 &&
+                                    childcard.GeneP1 == a.GeneP2
+                                    )
+                                    ) isinList = true;
+                            }
+                            if (!isinList) result.Add(childcard);
                         }
-                        if (!isinList) result.Add(childcard);
                     }
                 }
-            }
-            ListViewChildren.ItemsSource = result;
+                Sync.Post((o) =>
+                {
+                    GlobalTool.CloseProgress();
+                    var r = o as ObservableCollection<ChildCard>;
+                    ListViewChildren.ItemsSource = r;
+                }, result);
+            });
         }
 
         private void GroupChanged(object sender, SelectionChangedEventArgs e)

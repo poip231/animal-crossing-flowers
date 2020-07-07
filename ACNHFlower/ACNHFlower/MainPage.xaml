@@ -8,8 +8,7 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     
-    xmlns:muxc="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 7)"
-    >
+    xmlns:muxc="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 7)" xmlns:controls="using:Microsoft.UI.Xaml.Controls">
 
     <Grid>
 
@@ -81,6 +80,15 @@
                 Style="{StaticResource AccentButtonStyle}"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Top"/>
+
+        <controls:TeachingTip x:Name="TeachingTipSearch" 
+                              Title="注意！"
+                              Subtitle="配置未完成，请检查设置。"
+                              Target="{x:Bind ButtonSearch}">
+            <controls:TeachingTip.IconSource>
+                <controls:SymbolIconSource Symbol="Important" />
+            </controls:TeachingTip.IconSource>
+        </controls:TeachingTip>
 
     </Grid>
 </Page>
